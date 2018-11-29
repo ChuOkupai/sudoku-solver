@@ -2,8 +2,13 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 
 clean:
-	rm -f solve
+	rm -f *.o *.out
 
-solve.out: *.h *.c
+solver.o: solver.c solver.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+solve.out: main.c solver.o
 	$(CC) $(CFLAGS) $^ -o $@
-	./$@
+
+run: solve.out
+	./$<
